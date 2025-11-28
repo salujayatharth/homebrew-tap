@@ -1,8 +1,8 @@
 class CmonSony < Formula
-  desc "Turn Sony headphone play/pause into universal mute toggle"
+  desc "Turn Sony headphone play/pause into universal mic mute toggle"
   homepage "https://github.com/salujayatharth/cmon-sony"
-  url "https://github.com/salujayatharth/cmon-sony/archive/refs/tags/v1.1.0.tar.gz"
-  sha256 "8e7da3fc4240a4c0ed2f56fd933172c67d3f092aec3511c8962465508780e0c9"
+  url "https://github.com/salujayatharth/cmon-sony/archive/refs/tags/v1.2.0.tar.gz"
+  sha256 "6acb4377e76db99e56182c5d81679ee21461cd7606207d027be5e5085ae40054"
   license "MIT"
 
   depends_on :macos
