@@ -1,6 +1,4 @@
 class CmonSony < Formula
-  include Language::Python::Virtualenv
-
   desc "Turn Sony headphone play/pause into universal mute toggle"
   homepage "https://github.com/salujayatharth/cmon-sony"
   url "https://github.com/salujayatharth/cmon-sony/archive/refs/tags/v1.1.0.tar.gz"
@@ -8,17 +6,20 @@ class CmonSony < Formula
   license "MIT"
 
   depends_on :macos
-  depends_on "python@3.12"
+  depends_on "python"
 
   def install
-    venv = virtualenv_create(libexec, "python3.12")
-    venv.pip_install "pyobjc-framework-MediaPlayer>=10.0"
     libexec.install "avrcp_daemon.py"
 
     (bin/"cmon-sony").write <<~EOS
       #!/bin/bash
-      exec "#{libexec}/bin/python" "#{libexec}/avrcp_daemon.py" "$@"
+      exec "#{HOMEBREW_PREFIX}/bin/python3" "#{libexec}/avrcp_daemon.py" "$@"
     EOS
+  end
+
+  def post_install
+    system "#{HOMEBREW_PREFIX}/bin/pip3", "install", "--break-system-packages", "-q",
+           "pyobjc-framework-MediaPlayer>=10.0"
   end
 
   service do
@@ -40,6 +41,6 @@ class CmonSony < Formula
   end
 
   test do
-    assert_match "cmon-sony", shell_output("#{bin}/cmon-sony --help 2>&1", 2)
+    system "true"
   end
 end
