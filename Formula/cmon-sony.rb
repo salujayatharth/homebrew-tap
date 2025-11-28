@@ -1,4 +1,6 @@
 class CmonSony < Formula
+  include Language::Python::Virtualenv
+
   desc "Turn Sony headphone play/pause into universal mute toggle"
   homepage "https://github.com/salujayatharth/cmon-sony"
   url "https://github.com/salujayatharth/cmon-sony/archive/refs/tags/v1.1.0.tar.gz"
