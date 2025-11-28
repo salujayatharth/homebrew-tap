@@ -8,24 +8,9 @@ class CmonSony < Formula
   depends_on :macos
   depends_on "python@3.12"
 
-  resource "pyobjc-core" do
-    url "https://files.pythonhosted.org/packages/44/70/becb7c8cba5340869c6e5d18f14e651f3d03a6da94b270d97986543a8c2a/pyobjc_core-10.3.2.tar.gz"
-    sha256 "a3edf9a5e992c5a41bec1ff68ce98912ff71d0adbfc830308343167b96a3622a"
-  end
-
-  resource "pyobjc-framework-Cocoa" do
-    url "https://files.pythonhosted.org/packages/d5/7f/88c81da99fd46b8afe3f284d89ad241a91ee62a0cef45e24a2e6e29d9114/pyobjc_framework_cocoa-10.3.2.tar.gz"
-    sha256 "572c67f77cb27d5fd7fb4e4c9f6d2a9ec7f72a506db9a7e8d17c1332a2fc8015"
-  end
-
-  resource "pyobjc-framework-MediaPlayer" do
-    url "https://files.pythonhosted.org/packages/59/e6/ddd4c9f76dbd10e63a76a2addf400effdfe4e13ddc3db1e1f66ce62b8ab9/pyobjc_framework_mediaplayer-10.3.2.tar.gz"
-    sha256 "b3693c65ea809f49f2695c362b0c19dc9a2d179cfb35f0c8c3ef864c81d21de3"
-  end
-
   def install
     venv = virtualenv_create(libexec, "python3.12")
-    venv.pip_install resources
+    venv.pip_install "pyobjc-framework-MediaPlayer>=10.0"
     libexec.install "avrcp_daemon.py"
 
     (bin/"cmon-sony").write <<~EOS
